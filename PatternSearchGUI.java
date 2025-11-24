@@ -433,35 +433,39 @@ public class PatternSearchGUI extends Application {
             writeOutput("🔤 Case-insensitive mode enabled\n");
         }
         
+        // Make final copies for use in lambda expressions
+        final String finalSearchText = searchText;
+        final String finalSearchPattern = searchPattern;
+        
         writeOutput("\n============================================================\n");
         writeOutput(String.format("🔍 Searching for '%s' in '%s'\n", pattern, text));
         writeOutput(String.format("📏 Text length: %d, Pattern length: %d\n",
             text.length(), pattern.length()));
         writeOutput("============================================================\n\n");
         
-        int searchLimit = searchText.length() - searchPattern.length() + 1;
+        int searchLimit = finalSearchText.length() - finalSearchPattern.length() + 1;
         
         // Main search loop
         for (int textPosition = 0; textPosition < searchLimit && isSearching; textPosition++) {
             writeOutput(String.format("\n📍 Position %d:\n", textPosition));
             
             final int pos = textPosition;
-            Platform.runLater(() -> visualizeStep(searchText, searchPattern, pos, -1, null));
+            Platform.runLater(() -> visualizeStep(finalSearchText, finalSearchPattern, pos, -1, null));
             sleep(speedSlider.getValue() * 300);
             
             boolean isMatch = true;
             
             // Compare characters
-            for (int patternPosition = 0; patternPosition < searchPattern.length() && isSearching; patternPosition++) {
+            for (int patternPosition = 0; patternPosition < finalSearchPattern.length() && isSearching; patternPosition++) {
                 int currentTextIndex = textPosition + patternPosition;
-                char textChar = searchText.charAt(currentTextIndex);
-                char patternChar = searchPattern.charAt(patternPosition);
+                char textChar = finalSearchText.charAt(currentTextIndex);
+                char patternChar = finalSearchPattern.charAt(patternPosition);
                 
                 boolean matchesChar = textChar == patternChar;
                 
                 final int pp = patternPosition;
                 final boolean match = matchesChar;
-                Platform.runLater(() -> visualizeStep(searchText, searchPattern, pos, pp, match));
+                Platform.runLater(() -> visualizeStep(finalSearchText, finalSearchPattern, pos, pp, match));
                 
                 String symbol = matchesChar ? "✓" : "✗";
                 writeOutput(String.format("   Comparing: text[%d]='%c' ↔ pattern[%d]='%c' %s\n",
@@ -480,8 +484,8 @@ public class PatternSearchGUI extends Application {
                 matches.add(textPosition);
                 writeOutput(String.format("   ✅ MATCH FOUND at position %d!\n", textPosition));
                 final int finalPos = textPosition;
-                Platform.runLater(() -> visualizeStep(searchText, searchPattern, 
-                    finalPos, searchPattern.length() - 1, true));
+                Platform.runLater(() -> visualizeStep(finalSearchText, finalSearchPattern, 
+                    finalPos, finalSearchPattern.length() - 1, true));
                 sleep(speedSlider.getValue() * 1000);
             }
         }
