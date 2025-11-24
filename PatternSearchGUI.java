@@ -102,11 +102,11 @@ public class PatternSearchGUI extends Application {
         titleBox.setAlignment(Pos.CENTER);
         
         Label titleLabel = new Label("🔍 String Pattern Search Algorithm");
-        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 32));
         titleLabel.setTextFill(Color.WHITE);
         
         Label subtitleLabel = new Label("Learn how computers search for patterns in text");
-        subtitleLabel.setFont(Font.font("Arial", 12));
+        subtitleLabel.setFont(Font.font("Arial", 16));
         subtitleLabel.setTextFill(Color.web("#ecf0f1"));
         
         titleBox.getChildren().addAll(titleLabel, subtitleLabel);
@@ -120,20 +120,20 @@ public class PatternSearchGUI extends Application {
                          "-fx-background-radius: 5;");
         
         Label inputLabel = new Label("📝 Input");
-        inputLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        inputLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         
         // Text input
         Label textLabel = new Label("Text to search in:");
-        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 11));
+        textLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         textField = new TextField("hello world");
-        textField.setFont(Font.font("Courier New", 12));
+        textField.setFont(Font.font("Courier New", 16));
         textField.setStyle("-fx-border-color: #bdc3c7; -fx-border-width: 2;");
         
         // Pattern input
         Label patternLabel = new Label("Pattern to find:");
-        patternLabel.setFont(Font.font("Arial", FontWeight.BOLD, 11));
+        patternLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         patternField = new TextField("wor");
-        patternField.setFont(Font.font("Courier New", 12));
+        patternField.setFont(Font.font("Courier New", 16));
         patternField.setStyle("-fx-border-color: #bdc3c7; -fx-border-width: 2;");
         
         // Options
@@ -161,26 +161,26 @@ public class PatternSearchGUI extends Application {
         buttonBox.setAlignment(Pos.CENTER);
         
         searchButton = new Button("🔍 Start Search");
-        searchButton.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        searchButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         searchButton.setStyle("-fx-background-color: #27ae60; -fx-text-fill: white; " +
-                            "-fx-padding: 10 20; -fx-cursor: hand;");
+                            "-fx-padding: 12 24; -fx-cursor: hand;");
         searchButton.setOnAction(e -> startSearch());
         
         stopButton = new Button("⏹ Stop");
-        stopButton.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        stopButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         stopButton.setStyle("-fx-background-color: #e74c3c; -fx-text-fill: white; " +
-                          "-fx-padding: 10 20; -fx-cursor: hand;");
+                          "-fx-padding: 12 24; -fx-cursor: hand;");
         stopButton.setDisable(true);
         stopButton.setOnAction(e -> stopSearch());
         
         Button clearButton = new Button("🗑 Clear");
-        clearButton.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        clearButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         clearButton.setStyle("-fx-background-color: #95a5a6; -fx-text-fill: white; " +
-                           "-fx-padding: 10 20; -fx-cursor: hand;");
+                           "-fx-padding: 12 24; -fx-cursor: hand;");
         clearButton.setOnAction(e -> clearOutput());
         
         Button examplesButton = new Button("📚 Examples");
-        examplesButton.setFont(Font.font("Arial", FontWeight.BOLD, 12));
+        examplesButton.setFont(Font.font("Arial", FontWeight.BOLD, 14));
         examplesButton.setStyle("-fx-background-color: #3498db; -fx-text-fill: white; " +
                               "-fx-padding: 10 20; -fx-cursor: hand;");
         examplesButton.setOnAction(e -> showExamples());
@@ -205,9 +205,9 @@ public class PatternSearchGUI extends Application {
                        "-fx-background-radius: 5;");
         
         Label vizLabel = new Label("👁 Visual Representation");
-        vizLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        vizLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         
-        visualCanvas = new Canvas(950, 150);
+        visualCanvas = new Canvas(950, 170);
         visualCanvas.setStyle("-fx-border-color: #bdc3c7;");
         
         vizBox.getChildren().addAll(vizLabel, visualCanvas);
@@ -221,12 +221,12 @@ public class PatternSearchGUI extends Application {
                           "-fx-background-radius: 5;");
         
         Label outputLabel = new Label("📊 Search Process & Results");
-        outputLabel.setFont(Font.font("Arial", FontWeight.BOLD, 14));
+        outputLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
         
         outputArea = new TextArea();
         outputArea.setEditable(false);
         outputArea.setWrapText(true);
-        outputArea.setFont(Font.font("Courier New", 10));
+        outputArea.setFont(Font.font("Courier New", 13));
         outputArea.setPrefRowCount(15);
         outputArea.setStyle("-fx-border-color: #bdc3c7; -fx-border-width: 2;");
         
@@ -242,7 +242,7 @@ public class PatternSearchGUI extends Application {
         
         statusLabel = new Label("Ready to search");
         statusLabel.setTextFill(Color.WHITE);
-        statusLabel.setFont(Font.font("Arial", 10));
+        statusLabel.setFont(Font.font("Arial", 12));
         
         statusBar.getChildren().add(statusLabel);
         return statusBar;
@@ -257,10 +257,10 @@ public class PatternSearchGUI extends Application {
             return;
         }
         
-        double charWidth = 40;
-        double charHeight = 40;
+        double charWidth = 45;
+        double charHeight = 45;
         double startX = 50;
-        double startY = 60;
+        double startY = 70;
         
         // Draw text characters
         for (int i = 0; i < text.length(); i++) {
@@ -291,13 +291,13 @@ public class PatternSearchGUI extends Application {
             
             // Draw character
             gc.setFill(Color.WHITE);
-            gc.setFont(Font.font("Courier New", FontWeight.BOLD, 16));
+            gc.setFont(Font.font("Courier New", FontWeight.BOLD, 20));
             String charStr = text.charAt(i) == ' ' ? "␣" : String.valueOf(text.charAt(i));
-            gc.fillText(charStr, x + charWidth / 2 - 8, startY + charHeight / 2 + 6);
+            gc.fillText(charStr, x + charWidth / 2 - 10, startY + charHeight / 2 + 7);
             
             // Draw index
             gc.setFill(Color.web("#7f8c8d"));
-            gc.setFont(Font.font("Arial", 10));
+            gc.setFont(Font.font("Arial", 12));
             gc.fillText(String.valueOf(i), x + charWidth / 2 - 5, startY + charHeight + 15);
         }
         
@@ -317,7 +317,7 @@ public class PatternSearchGUI extends Application {
             
             // Pattern text
             gc.setFill(Color.web("#e74c3c"));
-            gc.setFont(Font.font("Arial", FontWeight.BOLD, 11));
+            gc.setFont(Font.font("Arial", FontWeight.BOLD, 13));
             gc.fillText(patternText, windowX, windowY);
             
             // Draw arrow
@@ -522,7 +522,7 @@ public class PatternSearchGUI extends Application {
         vbox.setStyle("-fx-background-color: white;");
         
         Label titleLabel = new Label("📚 Click an example to load it");
-        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 16));
+        titleLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
         
         vbox.getChildren().add(titleLabel);
         
@@ -541,9 +541,9 @@ public class PatternSearchGUI extends Application {
             Button btn = new Button(example[0] + "\nText: '" + example[1] + 
                                   "' | Pattern: '" + example[2] + "'");
             btn.setMaxWidth(Double.MAX_VALUE);
-            btn.setStyle("-fx-background-color: #ecf0f1; -fx-padding: 10; " +
+            btn.setStyle("-fx-background-color: #ecf0f1; -fx-padding: 12; " +
                         "-fx-cursor: hand; -fx-alignment: center-left;");
-            btn.setFont(Font.font("Arial", 11));
+            btn.setFont(Font.font("Arial", 13));
             
             String text = example[1];
             String pattern = example[2];
